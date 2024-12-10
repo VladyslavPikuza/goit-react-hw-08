@@ -1,0 +1,23 @@
+.Contact {
+    display: flex;
+    padding: 5px;
+    border: 1px solid #050505;
+    border-radius: 4px;
+   flex-direction: column;
+   width: 150px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+.info svg {
+    margin-right: 2px;
+}
+
+.Contact button {
+    cursor:pointer;
+    padding: 5px;
+    width: auto;
+}

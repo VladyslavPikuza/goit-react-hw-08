@@ -1,0 +1,31 @@
+.ContactForm {
+    border: 2px solid #080808;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 350px;
+}
+
+.ContactForm label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.ContactForm input {
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.ContactForm button {
+    display: block;
+        margin: 0 auto;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}

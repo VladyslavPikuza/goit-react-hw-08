@@ -1,0 +1,17 @@
+.SearchBox {
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.SearchBox label {
+    display: flex;
+        flex-direction: column;
+
+}
+
+.SearchBox input {
+    width: 350px;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
