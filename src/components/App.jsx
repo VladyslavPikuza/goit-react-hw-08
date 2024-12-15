@@ -1,33 +1,51 @@
-import { Routes, Route } from 'react-router-dom';
-import HomePage from '../pages/HomePage/HomePage';
-import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import ContactsPage from '../pages/ContactsPage/ContactsPage';
-import Layout from './Layout';
-import PrivateRoute from './PrivateRoute';
-import RestrictedRoute from './RestrictedRoute';
+import { useEffect, lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { refreshUser } from '../redux/auth/operations';
+import { useAuth } from './Hooks';
 
-const App = () => {
-  return (
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const ContactsPage= lazy(() => import('../pages/ContactsPage/ContactsPage'));
+
+export const App = () => {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route
           path="/register"
-          element={<RestrictedRoute component={<RegistrationPage />} />}
+          element={
+            <RestrictedRoute redirectTo="/tasks" component={<RegistrationPage />} />
+          }
         />
         <Route
           path="/login"
-          element={<RestrictedRoute component={<LoginPage />} />}
+          element={
+            <RestrictedRoute redirectTo="/tasks" component={<LoginPage />} />
+          }
         />
         <Route
-          path="/contacts"
-          element={<PrivateRoute component={<ContactsPage />} />}
+          path="/tasks"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+          }
         />
       </Route>
     </Routes>
   );
 };
-
-export default App;
 
