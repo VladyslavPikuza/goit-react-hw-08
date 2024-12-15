@@ -1,27 +1,42 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchContacts } from '../redux/contactsOps';
+import { refreshUser } from './redux/auth/operations';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './Layout';
+import PrivateRoute from './PrivateRoute';
+import RestrictedRoute from './RestrictedRoute';
+import HomePage from '../pages/HomePage/HomePage';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import RegistrationPage from '../pages/RegistrationPage';
+import ContactsPage from '../pages/ContactsPage/ContactsPage';
 
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import SearchBox from './SearchBox/SearchBox';
-
-const App = () => {
+function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <SearchBox />
-      <ContactList />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={<RestrictedRoute component={<RegistrationPage />} redirectTo="/contacts" />}
+        />
+        <Route
+          path="/login"
+          element={<RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />}
+        />
+        <Route
+          path="/contacts"
+          element={<PrivateRoute component={<ContactsPage />} redirectTo="/login" />}
+        />
+      </Route>
+    </Routes>
   );
-};
+}
 
 export default App;
+
