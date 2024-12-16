@@ -2,8 +2,8 @@
 const HomePage = () => {
   return (
     <div>
-      <h1>Добро пожаловать в приложение Контакты!</h1>
-      <p>Это приложение поможет вам управлять вашими контактами.</p>
+      <h1>Welcome to the Contacts app!</h1>
+      <p>This application will help you manage your contacts.</p>
     </div>
   );
 };
