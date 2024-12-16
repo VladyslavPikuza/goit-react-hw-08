@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/contacts/operations';
 import { selectFilteredContacts } from '../../redux/contacts/selectors';
 import ContactList from '../../components/ContactList/ContactList';
-import Filter from '../../components/Filter/Filter';
+import SearchBox from '../../components/SearchBox/SearchBox';
+import ContactForm from '../../components/ContactForm/ContactForm';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,14 @@ const ContactsPage = () => {
 
   return (
     <div>
-      <h1>Мои контакты</h1>
-      <Filter />
+      <h1>Phonebook</h1>
+      <ContactForm />
+      <h2>Contacts</h2>
+      <SearchBox />
       {contacts.length > 0 ? (
         <ContactList />
       ) : (
-        <p>Ваш список контактов пуст.</p>
+        <p>Your contact list is empty.</p>
       )}
     </div>
   );
