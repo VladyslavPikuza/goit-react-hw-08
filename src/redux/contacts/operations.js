@@ -17,7 +17,7 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
-// Добавление нового контакта
+
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
